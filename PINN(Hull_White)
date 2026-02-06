@@ -1,3 +1,5 @@
+# Hull-White PINN Implementation
+
 ```python
 import torch
 import torch.nn as nn
@@ -188,10 +190,6 @@ lambda_terminal = 10.0
 
 maturities_tensor = torch.tensor(maturities_np, device=device, dtype=torch.float32)
 
-print(f"Training samples: {len(train_dataset)}")
-print(f"Validation samples: {len(val_dataset)}")
-print(f"Test samples: {len(test_dataset)}")
-
 for epoch in tqdm(range(num_epochs), desc="Training PINN(Hull-White)"):
     model.train()
     for features_batch_cpu, labels_batch_cpu in train_loader:
@@ -317,10 +315,7 @@ for epoch in tqdm(range(num_epochs), desc="Training PINN(Hull-White)"):
     else:
         patience_counter += 1
         if patience_counter >= patience:
-            print(f"Early stopping at epoch {epoch+1}")
             break
-
-print(f"Training finished. Best validation MSE: {best_val_loss:.8f}")
 
 model.load_state_dict(best_model_weights)
 model.eval()
@@ -345,9 +340,5 @@ all_labels = np.concatenate(all_labels)
 r2 = r2_score(all_labels, all_preds)
 mse = mean_squared_error(all_labels, all_preds)
 
-print("="*50)
-print(f"FINAL PINN RESULTS (Hull-White)")
 print(f"MSE: {mse:.8f}")
 print(f"R2: {r2:.4f}")
-print("="*50)\```
-

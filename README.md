@@ -1,4 +1,3 @@
-[DeepONet(Hull-White).py](https://github.com/user-attachments/files/25129966/DeepONet.Hull-White.py)
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
